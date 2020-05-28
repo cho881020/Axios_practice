@@ -5,6 +5,7 @@
 비밀번호 : <input id="pw" type="password" placeholder="비밀번호 입력" value="Test!123"> </br>
 
 <button id="loginButton">로그인</button>
+<button id="signUpButton">회원가입</button>
 
 <script>
     $("#loginButton").click(function() {
@@ -22,4 +23,11 @@
         });
 
     })
+
+    $('#signUpButton').click(function() {
+
+        $(location).attr('href', 'signup_practice.html');
+
+    })
+
 </script>
