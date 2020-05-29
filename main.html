@@ -52,7 +52,9 @@
                 
                 // element안에 댓글 정보가 모두 담겨있다. => content / user.nick_name 활용
                 // <p>내용(닉네임)</p> 의 양식을 div안에 추가
-                $('#repliesDiv').append('<p>' + element.content + '(' + element.user.nick_name + ')' +'</p>')
+                let content = element.content
+                let writerNick = element.user.nick_name
+                $('#repliesDiv').append(`<p>${content}(${writerNick})`)
 
             });
 
