@@ -2,6 +2,11 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
+<div id="repliesDiv">
+
+</div>
+
+<p id="thisWeekTitle">토론 주제</p>
 <p id="loginUserEmail">로그인한 사람 이메일</p>
 <p id="loginUserNickName">로그인한 사람 닉네임</p>
 
@@ -32,6 +37,22 @@
         })
         .then(function (response) {
             console.log(response);
+
+            // 제목을 따서 텍스트에 반영
+            let title = response.data.data.topic.title
+            $('#thisWeekTitle').text(title)
+
+            // 댓글 배열을 따서
+            let replyArr = response.data.data.replies
+
+            // 배열 내부의 하나하나를 forEach로 뽑아봄
+            replyArr.forEach(element => {
+                
+                // element안에 댓글 정보가 모두 담겨있다. => content / user.nick_name 활용
+                // <p>내용(닉네임)</p> 의 양식을 div안에 추가
+                $('#repliesDiv').append('<p>' + element.content + '(' + element.user.nick_name + ')' +'</p>')
+
+            });
 
             let email = response.data.data.user.email
             $('#loginUserEmail').text(email)
