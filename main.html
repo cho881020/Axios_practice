@@ -3,6 +3,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 
+<img id="thisWeekImg">
+
 <p id="thisWeekTitle" style="font-size: 20;">토론 주제</p>
 
 <div id="repliesDiv">
@@ -43,6 +45,8 @@
             // 제목을 따서 텍스트에 반영
             let title = response.data.data.topic.title
             $('#thisWeekTitle').text(title)
+
+            $('#thisWeekImg').attr('src', response.data.data.topic.img_url)
 
             // 댓글 배열을 따서
             let replyArr = response.data.data.replies
