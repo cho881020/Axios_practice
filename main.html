@@ -1,4 +1,37 @@
-<p>로그인한 사람 이메일</p>
-<p>로그인한 사람 닉네임</p>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<p id="loginUserEmail">로그인한 사람 이메일</p>
+<p id="loginUserNickName">로그인한 사람 닉네임</p>
 
 <!-- 주제 제목 / 백그라운드 이미지  -->
+
+<script>
+    // axios로 main_info 정보 가져오기.
+
+    const instance = axios.create({
+        baseURL: 'http://15.165.177.142',
+        timeout: 1000,
+        headers: {'X-Http-Token': $.cookie('loginUserToken')}
+    });
+
+    instance.get('/main_info', {
+        params: {
+            device_token: '웹브라우저',
+            os: 'etc'
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+
+        let email = response.data.data.user.email
+        $('#loginUserEmail').text(email)
+
+        let nickName = response.data.data.user.nick_name
+        $('#loginUserNickName').text(nickName)
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
+</script>
